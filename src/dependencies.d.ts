@@ -1,31 +1,13 @@
-// TODO: Add types to each of these packages, replace them, or add full types here.
-
-declare module '@metamask/contract-metadata';
-
-declare module '@metamask/metamask-eth-abis';
-
-declare module 'eth-ens-namehash';
-
-declare module 'eth-json-rpc-infura/src/createProvider';
-
+// It's not worth typing this since we will replace it soon anyway
 declare module 'eth-keyring-controller';
 
-declare module 'eth-phishing-detect/src/config.json';
-
-declare module 'eth-phishing-detect/src/detector';
-
-declare module 'eth-query';
-
-declare module 'ethjs-provider-http';
-
-declare module 'ethjs-unit';
-
-declare module 'isomorphic-fetch';
-
+// It's not worth typing this since the `web3` package is not typed anyway
 declare module 'single-call-balance-checker-abi';
 
+// This adds a global and we can assume it matches the same type as `fetch`
+declare module 'isomorphic-fetch';
+
+// We want to remove this package, so it's not worth typing right now
 declare module 'web3-provider-engine';
-
 declare module 'web3-provider-engine/subproviders/provider';
-
 declare module 'web3-provider-engine/zero';

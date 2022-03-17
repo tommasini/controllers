@@ -42,7 +42,7 @@ export class AccountTrackerController extends BaseController<
   AccountTrackerConfig,
   AccountTrackerState
 > {
-  private ethQuery: any;
+  private ethQuery: EthQuery | null;
 
   private mutex = new Mutex();
 
@@ -98,6 +98,7 @@ export class AccountTrackerController extends BaseController<
     state?: Partial<AccountTrackerState>,
   ) {
     super(config, state);
+    this.ethQuery = null;
     this.defaultConfig = {
       interval: 10000,
     };
@@ -145,11 +146,17 @@ export class AccountTrackerController extends BaseController<
    * Refreshes all accounts in the current keychain.
    */
   refresh = async () => {
+    const { ethQuery } = this;
+
+    if (ethQuery === null) {
+      return;
+    }
+
     this.syncAccounts();
     const { accounts } = this.state;
     for (const address in accounts) {
       await safelyExecuteWithTimeout(async () => {
-        const balance = await query(this.ethQuery, 'getBalance', [address]);
+        const balance = await query<string>(ethQuery, 'getBalance', [address]);
         accounts[address] = { balance: BNToHex(balance) };
         this.update({ accounts: { ...accounts } });
       });
