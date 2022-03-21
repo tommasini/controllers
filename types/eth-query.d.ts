@@ -14,6 +14,11 @@ declare module 'eth-query' {
 
   type BlockParam = HexString | 'latest' | 'earliest' | 'pending';
 
+  export type EthQuerySendAsyncFunction<P = any, R = any> = (
+    request: JsonRpcRequest<P>,
+    callback: EthQueryMethodCallback<R>,
+  ) => void;
+
   export default class EthQuery {
     currentProvider: EthProvider;
 
@@ -135,9 +140,6 @@ declare module 'eth-query' {
 
     // Custom methods
 
-    sendAsync<P, R>(
-      request: JsonRpcRequest<P>,
-      callback: EthQueryMethodCallback<R>,
-    ): void;
+    sendAsync: EthQuerySendAsyncFunction;
   }
 }

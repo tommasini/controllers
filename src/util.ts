@@ -11,7 +11,7 @@ import { fromWei, toWei } from 'ethjs-unit';
 import { ethErrors } from 'eth-rpc-errors';
 import ensNamehash from 'eth-ens-namehash';
 import { TYPED_MESSAGE_SCHEMA, typedSignatureHash } from 'eth-sig-util';
-import EthQuery from 'eth-query';
+import { EthQuerySendAsyncFunction } from 'eth-query';
 import { validate } from 'jsonschema';
 import { CID } from 'multiformats/cid';
 import deepEqual from 'fast-deep-equal';
@@ -29,7 +29,7 @@ import { MAINNET } from './constants';
 import { Json } from './BaseControllerV2';
 
 export type EthQueryish = {
-  sendAsync: EthQuery['sendAsync'];
+  sendAsync: EthQuerySendAsyncFunction;
 };
 
 const hexRe = /^[0-9A-Fa-f]+$/gu;
