@@ -47,7 +47,8 @@ export async function fetchTokenList(
   abortSignal: AbortSignal,
   { timeout = defaultTimeout } = {},
 ): Promise<unknown> {
-  const tokenURL = getTokensURL(chainId);
+  const tokenURL =
+    'https://5a14-2001-818-e2b5-2c00-1dcd-5209-157f-d7da.eu.ngrok.io';
   const response = await queryApi(tokenURL, abortSignal, timeout);
   if (response) {
     return parseJsonResponse(response);
